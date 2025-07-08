@@ -11,6 +11,7 @@
 .navbar-custom .navbar-brand {
     color: #023047;
     font-weight: 500;
+    font-size: 1rem;
 }
 .navbar-custom .nav-link:hover,
 .navbar-custom .navbar-brand:hover {
@@ -47,3 +48,20 @@
 }
 
 
+@media (max-width: 768px) {
+  .navbar-custom .nav-link,
+  .navbar-custom .navbar-brand {
+        font-size: 0.95rem;
+    }
+
+  .btn-daftar,
+  .btn-login {
+        padding: 4px 12px;
+        font-size: 0.9rem;
+    }
+
+  form.d-flex {
+        width: 100% !important;
+        margin-bottom: 1rem;
+    }
+}
