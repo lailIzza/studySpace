@@ -16,6 +16,9 @@ $routes->get('/pengumuman', 'Postingan::pengumuman');
 //routes user profil
 $routes->get('/profil', 'User::profil');
 
+$routes->get('pertanyaan/(:num)', 'postingan::detail/$1');
+
+
 //routes auth
 $routes->get('/login', 'Auth::login');
 $routes->get('/daftar', 'Auth::daftar');
