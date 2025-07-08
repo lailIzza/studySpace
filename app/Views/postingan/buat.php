@@ -11,26 +11,26 @@
         <!-- Formulir -->
         <div class="col-md-8">
             <div class="form-section">
-                <form enctype="multipart/form-data" id="formPertanyaan">
+                <form action="<?= base_url('postingan/simpan') ?>" method="post" enctype="multipart/form-data" id="formPertanyaan">
 
                     <div class="mb-3">
                         <label for="pertanyaan">Pertanyaan :</label>
-                        <textarea id="pertanyaan" rows="4" class="form-control" placeholder="Tanyakan pertanyaan apapun...."></textarea>
+                        <textarea id="pertanyaan" name="content" rows="4" class="form-control" placeholder="Tanyakan pertanyaan apapun...."></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="kategori">Kategori Mata Pelajaran :</label>
-                        <select id="kategori" class="form-select">
-                            <option selected disabled>Pilih mata pelajaran</option>
-                            <option>Matematika</option>
-                            <option>Bahasa Indonesia</option>
-                            <option>IPA</option>
+                        <select id="kategori" name="subject_id" class="form-select"  required>
+                            <option value="" disabled selected>Pilih mata pelajaran</option>
+                            <?php foreach ($subjects as $subject): ?>
+                                <option value="<?= $subject['id'] ?>"><?= $subject['name'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label>Tambah Gambar :</label><br>
-                        <input type="file" id="gambar" accept="image/*" class="d-none" onchange="previewGambar(event)">
+                        <input type="file" name="image" id="gambar" accept="image/*" class="d-none" onchange="previewGambar(event)">
                         <button type="button" class="btn btn-light border mb-2" onclick="document.getElementById('gambar').click()">Pilih gambar</button>
 
                         <!-- Area preview -->
@@ -42,10 +42,11 @@
 
                     <div class="mb-4">
                         <label for="reward">Poin Reward</label>
-                        <select id="reward" class="form-select">
-                            <option>25 poin</option>
-                            <option>50 poin</option>
-                            <option>100 poin</option>
+                        <select id="reward" name="reward_point" class="form-select">
+                            <option value="15" >15 poin</option>
+                            <option value="25" >25 poin</option>
+                            <option value="30" >30 poin</option>
+                            <option value="50" >50 poin</option>
                         </select>
                     </div>
 
