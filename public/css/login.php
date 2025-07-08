@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #141414;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.left-side {
+  flex: 1;
+  background-color: #d8c8f8;
+  padding: 60px 50px 30px 60px;
+  color: #2d1460;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.welcome-text {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtext {
+  font-size: 13px;
+  color: #5e4b8b;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+.question {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.btn-outline {
+  background-color: #fff;
+  color: #4c2a85;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 30px;
+  transition: background-color 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: #eee;
+}
+
+.illustration {
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  width: 320px;
+  height: auto;
+}
+
+/* KANAN */
+.right-side {
+  flex: 2.55; 
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 600px; 
+  padding: 40px 50px;
+  box-shadow: 0 5px 8px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.form-title {
+  text-align: center;
+  color: #2d1460;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #eee0fb;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.input-wrapper .icon {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #3f2d7c;
+}
+
+.input-wrapper input {
+  border: none;
+  background: none;
+  outline: none;
+  flex: 1;
+  font-size: 13px;
+  color: #3f2d7c;
+  font-weight: 500;
+}
+
+.btn-filled {
+  width: 100%;
+  background-color: #4c2a85;
+  color: white;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-filled:hover {
+  background-color: #3a1f6b;
+}
+
