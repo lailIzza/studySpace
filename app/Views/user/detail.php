@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/template') ?>
+<!-- <?= $this->extend('layouts/template') ?>
 <?= $this->section('content') ?>
 
 <div class="container mt-4">
@@ -50,4 +50,4 @@
     <?php endforeach ?>
 </div>
 
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> -->
