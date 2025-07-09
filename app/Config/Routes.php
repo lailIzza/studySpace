@@ -7,18 +7,25 @@ use CodeIgniter\Router\RouteCollection;
  */
 //$routes->get('/', 'Home::index');
 
-//router beranda,buat,detail,pengumuman
+// Beranda + detail
 $routes->get('/', 'Postingan::beranda');
-$routes->get('/buat', 'Postingan::buat');
-$routes->get('/detail', 'Postingan::detail');
-$routes->get('/pengumuman', 'Postingan::pengumuman');
+$routes->get('detail/(:num)', 'Postingan::detail/$1');
+$routes->get('kategori/(:num)', 'Postingan::filterKategori/$1');
 
-//routes user profil
-$routes->get('/profil', 'User::profil');
+// Hanya bisa diakses jika login
+$routes->get('/buat', 'Postingan::buat', ['filter' => 'auth']);
+$routes->post('postingan/simpan', 'Postingan::store');
+$routes->post('komentar/simpan', 'Komentar::simpan');
+$routes->post('like/toggle', 'Like::toggle');
+$routes->get('search', 'Postingan::search');
+$routes->get('/pengumuman', 'Pengumuman::pengumuman', ['filter' => 'auth']);
+$routes->get('/profil', 'User::profil', ['filter' => 'auth']);
 
-$routes->get('pertanyaan/(:num)', 'postingan::detail/$1');
 
-
-//routes auth
+// Auth routes
 $routes->get('/login', 'Auth::login');
 $routes->get('/daftar', 'Auth::daftar');
+
+$routes->post('register/process', 'Auth::processRegister');
+$routes->post('login/process', 'Auth::processLogin');
+$routes->get('logout', 'Auth::logout');

@@ -20,21 +20,51 @@
         <div class="container">
             <a class="navbar-brand fw-bold" href="/">StudySpace</a>
 
+            <!-- tombol burger untuk responsif web -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="navbarContent">
-                <form class="d-flex mx-auto my-2 my-lg-0" style="width: 50%;">
-                    <input class="form-control me-2 rounded-pill" type="search" placeholder="Cari pertanyaan..." aria-label="Search">
+                <form class="d-flex mx-auto my-2 my-lg-0" action="<?= base_url('search') ?>" method="get" style="width: 50%;">
+                    <input name="q" class="form-control rounded-start-pill" type="search" placeholder="Cari pertanyaan..." aria-label="Search">
+                    <button class="btn btn-outline-secondary rounded-end-pill ms-2" type="submit">
+                        <i class="bx bx-search"></i>
+                    </button>
                 </form>
+                
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="buat">Ajukan Pertanyaan</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pengumuman">Pengumuman</a>
-                    </li>
                 </ul>
                 <div class="d-flex gap-2">
-                    <a href="daftar" class="btn btn-daftar">Daftar</a>
-                    <a href="login" class="btn btn-login">Login</a>
+                    
+                    <?php if (session()->get('isLoggedIn')): ?>
+                        <!-- MENU UNTUK USER YANG SUDAH LOGIN -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('pengumuman') ?>">Pengumuman</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex gap-2">
+                            <a href="<?= base_url('profil') ?>" class="d-flex align-items-center text-decoration-none gap-2">
+                                <div class="avatar-circle" style="background-color: <?= session()->get('avatar_color') ?? '#6c757d' ?>;">
+                                    <?= strtoupper(substr(session()->get('username'), 0, 1)) ?>
+                                </div>
+                                <span class="fw-semibold text-dark"><?= session()->get('username') ?></span>
+                            </a>
+                            <a href="<?= base_url('logout') ?>" class="btn btn-danger">Keluar</a>
+                        </div>
+                    <?php else: ?>
+                        <!-- MENU UNTUK USER BELUM LOGIN -->
+                        <div class="d-flex gap-2">
+                            <a href="<?= base_url('daftar') ?>" class="btn btn-daftar">Daftar</a>
+                            <a href="<?= base_url('login') ?>" class="btn btn-login">Login</a>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>
@@ -43,6 +73,8 @@
 
     <?= $this->renderSection('content') ?>
 
+    <!-- js boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

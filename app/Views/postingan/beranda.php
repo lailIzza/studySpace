@@ -12,77 +12,87 @@
             <div class="card p-3">
                 <h6 class="fw-bold mb-3">Kategori</h6>
                 <ul class="list-unstyled sidebar-subjects">
-                    <li>Semua Mata Pelajaran</li>
-                    <li>📘 Matematika</li>
-                    <li>🧬 Biologi</li>
-                    <li>📚 IPS</li>
-                    <li>⚖️ PPKN</li>
-                    <li>🏺 Sejarah</li>
-                    <li>🧪 Fisika</li>
-                    <li>🧠 Antropologi</li>
-                    <li>🎨 Seni</li>
-                    <li>📝 Bahasa Indonesia</li>
-                    <li>🗣️ Bahasa Inggris</li>
-                    <li>🌐 Bahasa Asing</li>
-                    <li>☪️ PAI</li>
+                    <li>
+                        <a href="<?= base_url('/') ?>" class="<?= !isset($selected) ? 'active' : '' ?>">Semua Mata Pelajaran</a>
+                    </li>
+                    <?php foreach ($subjects as $subject): ?>
+                        <li>
+                        <a href="<?= base_url('kategori/' . $subject['id']) ?>"
+                            class="<?= (isset($selected) && $selected == $subject['name']) ? 'active' : '' ?>">
+                            <?= $subject['name'] ?>
+                        </a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
 
         <!-- postingan -->
         <div class="col-md-9">
-            <a href="detail" class="text-decoration-none text-dark">
-                <div class="card mb-4 p-3 post-card-hoverable">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div class="d-flex align-items-center gap-2">
-                            <img src="<?= base_url('asset/no-image.png') ?>" alt="avatar" class="rounded-circle" width="40" height="40">
-                            <div>
-                                <div class="fw-semibold">Amanda</div>
-                                <div class="text-muted small">Matematika</div>
-                            </div>
-                        </div>
-                        <span class="badge bg-primary">25 Poin</span>
-                    </div>
 
-                    <!-- Isi Postingan -->
-                    <p class="mt-3 mb-2 text-decoration-underline">Ini tes satu dua</p>
-                    <hr>
-
-                    <!-- Reaksi -->
-                    <div class="d-flex gap-3 text-muted fs-6">
-                        <span>❤️ 12</span>
-                        <span>💬 6</span>
-                    </div>
+            <!-- notif jika postingan berhasil dibuat -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('success') ?>
                 </div>
-            </a>
+                <?php endif; ?>
 
-            <a href="detail" class="text-decoration-none text-dark">
-                <div class="card mb-4 p-3 post-card-hoverable">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div class="d-flex align-items-center gap-2">
-                            <img src="<?= base_url('asset/no-image.png') ?>" alt="avatar" class="rounded-circle" width="40" height="40">
-                            <div>
-                                <div class="fw-semibold">Amanda</div>
-                                <div class="text-muted small">Matematika</div>
-                            </div>
-                        </div>
-                        <span class="badge bg-primary">25 Poin</span>
-                    </div>
-
-                    <!-- Isi Postingan -->
-                    <p class="mt-3 mb-2 text-decoration-underline">Ini tes satu dua</p>
-                    <div class="text-center mb-3">
-                        <img src="<?= base_url('asset/no-image.png') ?>" class="img-fluid rounded soal-gambar" alt="gambar soal">
-                    </div>
-                    <hr>
-
-                    <!-- Reaksi -->
-                    <div class="d-flex gap-3 text-muted fs-6">
-                        <span>❤️ 12</span>
-                        <span>💬 6</span>
-                    </div>
+                <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error') ?>
                 </div>
-            </a>
+            <?php endif; ?>
+
+            <!-- judul kontekstual -->
+            <?php if (isset($selected)): ?>
+                <h5 class="mb-3"><?= $mode === 'kategori' ? 'Kategori: ' : '' ?><?= $selected ?></h5>
+            <?php endif; ?>
+
+            <!-- notif jika kosong -->
+            <?php if (empty($posts)): ?>
+                <div class="alert alert-warning">
+                    <?php if ($mode === 'kategori'): ?>
+                        Tidak ada postingan dalam kategori <strong><?= $selected ?></strong>.
+                    <?php elseif ($mode === 'search'): ?>
+                        Tidak ada hasil untuk pencarian <strong><?= $selected ?></strong>.
+                    <?php else: ?>
+                        Tidak ada postingan ditemukan.
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>`
+
+            <?php foreach ($posts as $post): ?>
+                <a href="<?= base_url('detail/' . $post['id']) ?>" class="text-decoration-none text-dark">
+                    <div class="card mb-4 p-3 post-card-hoverable">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="d-flex align-items-center gap-2">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: <?= $post['avatar_color'] ?? '#6c757d' ?>; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold;">
+                                    <?= strtoupper(substr($post['username'], 0, 1)) ?>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold"><?= $post['username'] ?></div>
+                                    <div class="text-muted small"><?= $post['subject_name'] ?></div>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary"><?= $post['reward_point'] ?> Poin</span>
+                        </div>
+
+                        <p class="mt-3 mb-2 text-decoration-underline"><?= esc($post['content']) ?></p>
+
+                        <?php if (!empty($post['image'])): ?>
+                            <div class="text-center mb-3">
+                                <img src="<?= base_url('upload/' . $post['image']) ?>" class="img-fluid rounded soal-gambar" alt="gambar soal">
+                            </div>
+                        <?php endif; ?>
+
+                        <hr>
+                        <div class="d-flex gap-3 text-muted fs-6">
+                            <span>❤️ 0</span>
+                            <span>💬 0</span>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
 
         </div>
         

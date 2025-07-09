@@ -85,13 +85,53 @@ class Postingan extends BaseController
 
         return view('postingan/buat', $data);
     }
-    public function detail(): string
+    public function detail($id)
     {
-        $data =[
-            'title' => 'Detail Pertanyaan'
-        ];
-        return view('postingan/detail', $data);
+        $postModel     = new \App\Models\PostModel();
+        $userModel     = new \App\Models\UserModel();
+        $subjectModel  = new \App\Models\SubjectModel();
+        $commentModel  = new \App\Models\CommentModel();
+        $likeModel = new \App\Models\LikeModel();
+
+        // total like untuk post ini
+        $likeCount = $likeModel->where('post_id', $id)->countAllResults();
+
+        // apakah user sudah like?
+        $liked = false;
+        if (session()->get('isLoggedIn')) {
+            $liked = $likeModel->where('post_id', $id)
+                            ->where('user_id', session()->get('user_id'))
+                            ->first() ? true : false;
+        }
+
+        // Ambil data post + user + mapel
+        $post = $postModel->select('posts.*, users.username, users.avatar_color, subjects.name as subject_name')
+            ->join('users', 'users.id = posts.user_id')
+            ->join('subjects', 'subjects.id = posts.subject_id')
+            ->where('posts.id', $id)
+            ->first();
+
+        // Cek kalau data gak ada
+        if (!$post) {
+            return redirect()->to('/')->with('error', 'Pertanyaan tidak ditemukan.');
+        }
+
+        // Ambil komentar (jawaban)
+        $comments = $commentModel->select('comments.*, users.username, users.avatar_color')
+            ->join('users', 'users.id = comments.user_id')
+            ->where('comments.post_id', $id)
+            ->orderBy('comments.created_at', 'ASC')
+            ->findAll();
+
+        return view('postingan/detail', [
+            'title'    => 'Detail Pertanyaan',
+            'post'     => $post,
+            'jawaban'  => $comments,
+            'likeCount'=> $likeCount,
+            'liked'    => $liked
+        ]);
     }
+
     public function pengumuman(): string
     {
         $data =[

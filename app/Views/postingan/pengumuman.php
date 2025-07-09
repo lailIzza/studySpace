@@ -8,39 +8,19 @@
 <div class="container mt-3">
     <h6 class="mb-3"><i class="bi bi-chevron-left"></i> Pengumuman</h6>
 
-    <!-- Pengumuman 1 -->
-    <div class="announcement-card card-point">
-        <div class="tag tag-point">Poin</div>
-        <div class="fw-semibold">Poin baru didapatkan!</div>
-        <div>Selamat, poin sebesar 50 telah ditambahkan ke akun anda. Cek secara berkala dan dapatkan bonus tambahan yang menarik.</div>
-    </div>
+    <?php foreach ($pengumuman as $item): ?>
+        <div class="announcement-card card-<?= esc($item['type']) ?>">
+            <div class="tag tag-<?= esc($item['type']) ?>"><?= ucfirst($item['type']) ?></div>
+            <div class="fw-semibold"><?= esc($item['title']) ?></div>
+            <div class="text-muted small">Dikirim oleh: <?= esc($item['username']) ?></div>
+            <div><?= esc($item['message']) ?></div>
+        </div>
 
-    <!-- Pengumuman Jawaban -->
-    <div class="announcement-card card-jawaban">
-        <div class="tag tag-jawaban">Jawaban</div>
-        <div class="fw-semibold">Jawaban pertanyaan</div>
-        <div>Selamat, pertanyaanmu telah dijawab oleh @XX_Bahrh9. Segera cek dan jangan lupa berikan apresiasi ke penjawab.</div>
-    </div>
+    <?php endforeach; ?>
 
-    <!-- Pengumuman 2 -->
-    <div class="announcement-card card-point">
-        <div class="tag tag-point">Poin</div>
-        <div class="fw-semibold">Poin baru didapatkan!</div>
-        <div>Selamat, poin sebesar 50 telah ditambahkan ke akun anda. Cek secara berkala dan dapatkan bonus tambahan yang menarik.</div>
-    </div>
+    <?php if (empty($pengumuman)): ?>
+        <div class="alert alert-info mt-3">Belum ada pengumuman.</div>
+    <?php endif; ?>
 
-    <!-- Pengumuman 3 -->
-    <div class="announcement-card card-point">
-        <div class="tag tag-point">Poin</div>
-        <div class="fw-semibold">Poin baru didapatkan!</div>
-        <div>Selamat, poin sebesar 50 telah ditambahkan ke akun anda. Cek secara berkala dan dapatkan bonus tambahan yang menarik.</div>
-    </div>
-
-    <!-- Sistem -->
-    <div class="announcement-card card-sistem">
-        <div class="tag tag-sistem">Sistem</div>
-        <div class="fw-semibold">Selamat datang di StudySpace!!</div>
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div>
-    </div>
 </div>
 <?= $this->endSection()?>
