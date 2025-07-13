@@ -4,25 +4,39 @@ namespace App\Controllers;
 
 class Postingan extends BaseController
 {
-    public function beranda(): string
+     public function beranda(): string
     {
         $postModel = new \App\Models\PostModel();
         $subjectModel = new \App\Models\SubjectModel();
 
         $posts = $postModel->select('posts.id, posts.user_id, posts.subject_id, posts.content, posts.image, posts.type, posts.reward_point, posts.created_at, users.username, users.avatar_color, subjects.name as subject_name')
-        ->join('users', 'users.id = posts.user_id')
-        ->join('subjects', 'subjects.id = posts.subject_id')
-        ->orderBy('posts.created_at', 'DESC')
-        ->findAll();
+            ->join('users', 'users.id = posts.user_id')
+            ->join('subjects', 'subjects.id = posts.subject_id')
+            ->orderBy('posts.created_at', 'DESC')
+            ->findAll();
 
         // dd($posts[0]);
         $subjects = $subjectModel->findAll();
 
+        $likeModel = new \App\Models\LikeModel();
+        $commentModel = new \App\Models\CommentModel();
+
+        $likeCounts = [];
+        $commentCounts = [];
+
+        foreach ($posts as $post) {
+            $likeCounts[$post['id']] = $likeModel->where('post_id', $post['id'])->countAllResults();
+            $commentCounts[$post['id']] = $commentModel->where('post_id', $post['id'])->countAllResults();
+        }
+
         return view('postingan/beranda', [
-            'title'    => 'Beranda',
-            'posts'    => $posts,
+            'title' => 'Beranda',
+            'posts' => $posts,
             'subjects' => $subjects,
+            'likes' => $likeCounts,
+            'comments' => $commentCounts
         ]);
+
     }
     public function filterKategori($id)
     {

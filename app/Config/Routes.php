@@ -20,7 +20,9 @@ $routes->post('like/toggle', 'Like::toggle');
 $routes->get('search', 'Postingan::search');
 $routes->get('/pengumuman', 'Pengumuman::pengumuman', ['filter' => 'auth']);
 $routes->get('/profil', 'User::profil', ['filter' => 'auth']);
-
+$routes->get('user/edit', 'User::edit');
+$routes->post('user/update', 'User::update');
+$routes->get('user/profil', 'User::profil');
 
 // Auth routes
 $routes->get('/login', 'Auth::login');
