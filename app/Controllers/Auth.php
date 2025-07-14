@@ -75,7 +75,12 @@ class Auth extends BaseController
             'avatar_color' => $user['avatar_color'],
         ]);
 
-        return redirect()->to('/');
+        //role redirect tiap user
+        if ($user['role'] === 'admin') {
+        return redirect()->to('dashboard');
+        } else {
+            return redirect()->to('/');
+        }
     }
 
     public function logout()
