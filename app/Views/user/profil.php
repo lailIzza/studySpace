@@ -60,7 +60,7 @@
     </div>
 
     <!-- Pengumuman -->
-    <?php if (!empty($announcements)): ?>
+    <!-- <?php if (!empty($announcements)): ?>
         <div class="mt-4">
             <h5>Pengumuman untuk Anda</h5>
             <ul class="list-group">
@@ -73,6 +73,6 @@
                 <?php endforeach ?>
             </ul>
         </div>
-    <?php endif ?>
+    <?php endif ?> -->
 </div>
 <?= $this->endSection() ?>

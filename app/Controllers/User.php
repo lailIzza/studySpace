@@ -11,7 +11,7 @@ class User extends BaseController
     public function profil()
     {
         $userModel = new UserModel();
-        $announcementModel = new AnnouncementModel();
+       // $announcementModel = new AnnouncementModel();
 
         $userId = session()->get('user_id');
 
@@ -33,7 +33,7 @@ class User extends BaseController
 
         // Siapkan data ke view
         $data['user'] = $userData;
-        $data['announcements'] = $announcementModel->getUserAnnouncements($userId);
+       // $data['announcements'] = $announcementModel->getUserAnnouncements($userId);
         
 
         return view('user/profil', $data);
