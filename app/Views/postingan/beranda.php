@@ -86,9 +86,9 @@
                         <?php endif; ?>
 
                         <hr>
-                        <div class="d-flex gap-3 text-muted fs-6">
-                            <span>❤️ 0</span>
-                            <span>💬 0</span>
+                         <div class="d-flex gap-3 text-muted fs-6">
+                            <span>❤️ <?= $likes[$post['id']] ?? 0 ?></span>
+                            <span>💬 <?= $comments[$post['id']] ?? 0 ?></span>
                         </div>
                     </div>
                 </a>
