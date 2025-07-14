@@ -19,32 +19,6 @@ display: inline-block;
 margin-bottom: 6px;
 }
 
-.tag-point {
-background-color: #d6c3f7;
-color: #4b2991;
-}
-
-.tag-jawaban {
-background-color: #c6e5f7;
-color: #115d8c;
-}
-
-.tag-sistem {
-background-color: #b2ebc2;
-color: #116644;
-}
-
-.card-point {
-background-color: #ebdafe;
-}
-
-.card-jawaban {
-background-color: #d6f0ff;
-}
-
-.card-sistem {
-background-color: #d8f9e5;
-}
 
 .footer-text {
 text-align: center;
@@ -57,3 +31,37 @@ font-size: 14px;
 border-radius: 8px;
 }
 
+.card-point {
+    background: #f3e8ff;
+    border-left: 4px solid #a855f7;
+}
+.card-jawaban {
+    background: #e0f7fa;
+    border-left: 4px solid #00bcd4;
+}
+.card-sistem {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.tag-point {
+    background: #a855f7;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.tag-jawaban {
+    background: #00bcd4;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.tag-sistem {
+    background: #4caf50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}

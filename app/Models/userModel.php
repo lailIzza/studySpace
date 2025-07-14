@@ -49,4 +49,21 @@ class UserModel extends Model
 
     }
 
+    public function addPoints($userId, $amount = 1)
+    {
+        return $this->db->table($this->table)
+            ->set('points', "points + {$amount}", false) // false = biar gak di-escape (raw SQL)
+            ->where('id', $userId)
+            ->update();
+    }
+
+    public function reducePoints($userId, $amount = 1)
+    {
+        return $this->db->table($this->table)
+            ->set('points', "GREATEST(points - {$amount}, 0)", false) // biar gak minus
+            ->where('id', $userId)
+            ->update();
+    }
+
+
 }
