@@ -31,3 +31,7 @@ $routes->get('/daftar', 'Auth::daftar');
 $routes->post('register/process', 'Auth::processRegister');
 $routes->post('login/process', 'Auth::processLogin');
 $routes->get('logout', 'Auth::logout');
+
+
+//Admin 
+$routes->get('dashboard', 'Admin::dashboard');
