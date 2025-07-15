@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Postingan extends BaseController
 {
-     public function beranda(): string
+    public function beranda(): string
     {
         $postModel = new \App\Models\PostModel();
         $subjectModel = new \App\Models\SubjectModel();
