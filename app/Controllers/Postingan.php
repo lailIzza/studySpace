@@ -34,7 +34,8 @@ class Postingan extends BaseController
             'posts' => $posts,
             'subjects' => $subjects,
             'likes' => $likeCounts,
-            'comments' => $commentCounts
+            'comments' => $commentCounts,
+            'mode' => 'default'
         ]);
 
     }
