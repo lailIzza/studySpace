@@ -13,7 +13,7 @@
     <div class="row">
         <!-- Avatar Sidebar -->
         <div class="col-md-4 text-center mb-4">
-            <img src="<?= base_url('uploads/avatar/' . ($user['avatar'] ?? 'default.png')) ?>" alt="Avatar"
+            <img src="<?= base_url('img/avatar/' . ($user['avatar'] ?? 'default.png')) ?>" alt="Avatar"
                 class="img-fluid rounded-circle border border-3" width="150">
             <h4 class="mt-3"><?= esc($user['username']) ?></h4>
             <p class="text-muted"><?= esc($user['email']) ?></p>
@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <th scope="row">Jawaban Diberikan</th>
-                            <td>: <?= $user['comments'] ?? '0' ?></td>
+                            <td>: <?= $commentCount ?></td>
                         </tr>
                         <tr>
                             <th scope="row">Lencana Terbaru</th>
@@ -60,7 +60,7 @@
     </div>
 
     <!-- Pengumuman -->
-    <!-- <?php if (!empty($announcements)): ?>
+    <?php if (!empty($announcements)): ?>
         <div class="mt-4">
             <h5>Pengumuman untuk Anda</h5>
             <ul class="list-group">
@@ -73,6 +73,6 @@
                 <?php endforeach ?>
             </ul>
         </div>
-    <?php endif ?> -->
+    <?php endif ?>
 </div>
 <?= $this->endSection() ?>

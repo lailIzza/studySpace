@@ -17,7 +17,7 @@ class UserModel extends Model
         'gender',
         'role',
         'points',
-        // 'avatar',
+        'avatar',
         'avatar_color',
         'created_at'
     ];
