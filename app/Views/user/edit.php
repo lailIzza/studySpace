@@ -4,42 +4,36 @@
 <div class="container mt-4">
     <h2>Edit Profil</h2>
 
-    <?php if (session()->getFlashdata('validation')): ?>
-        <div class="alert alert-danger">
-            <?= session()->getFlashdata('validation')->listErrors() ?>
-        </div>
-    <?php endif ?>
 
-    <form action="<?= base_url('user/update') ?>" method="post">
-        <div class="mb-3">
-            <label for="username">Username</label>
-            <input type="text" name="username" class="form-control" value="<?= esc($user['username']) ?>">
-        </div>
-        <div class="mb-3">
-            <label for="email">Email</label>
-            <input type="email" name="email" class="form-control" value="<?= esc($user['email']) ?>">
-        </div>
-        <div class="mb-3">
-            <label for="gender">Jenis Kelamin</label>
-            <select name="gender" class="form-control">
-                <option value="male" <?= $user['gender'] === 'male' ? 'selected' : '' ?>>Laki-laki</option>
-                <option value="female" <?= $user['gender'] === 'female' ? 'selected' : '' ?>>Perempuan</option>
-            </select>
-        </div>
-        <form action="<?= base_url('user/update') ?>" method="post" enctype="multipart/form-data">
+    <form action="/user/update" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
 
-    <!-- input avatar -->
-
     <div class="mb-3">
-        <label for="avatar">Ganti Avatar (jpg/png)</label>
-        <input type="file" name="avatar" class="form-control">
+        <label>Username</label>
+        <input type="text" name="username" value="<?= esc($user['username']) ?>" required class="form-control">
     </div>
 
-   
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" value="<?= esc($user['email']) ?>" required class="form-control">
+    </div>
 
+    <div class="mb-3">
+        <label>Gender</label>
+        <select name="gender" class="form-control">
+            <option value="male" <?= $user['gender'] == 'male' ? 'selected' : '' ?>>Laki-laki</option>
+            <option value="female" <?= $user['gender'] == 'female' ? 'selected' : '' ?>>Perempuan</option>
+        </select>
+    </div>
 
+    <div class="mb-3">
+        <label>Avatar</label><br>
+        
+        <!-- PREVIEW GAMBAR -->
+        <img id="avatar-preview" src="<?= base_url('img/avatar/' . esc($user['avatar'])) ?>" alt="Avatar" width="120" class="img-thumbnail mb-2"><br>
 
+        <input type="file" name="avatar" accept="image/*" onchange="previewAvatar(event)" class="form-control">
+    </div>
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         <a href="<?= base_url('user/profil') ?>" class="btn btn-secondary ms-2">Batal</a>
     </form>
