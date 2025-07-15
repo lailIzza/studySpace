@@ -5,10 +5,10 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-//$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index');
 
 // Beranda + detail
-$routes->get('/', 'Postingan::beranda');
+$routes->get('beranda', 'Postingan::beranda');
 $routes->get('detail/(:num)', 'Postingan::detail/$1');
 $routes->get('kategori/(:num)', 'Postingan::filterKategori/$1');
 
@@ -35,3 +35,10 @@ $routes->get('logout', 'Auth::logout');
 
 //Admin 
 $routes->get('dashboard', 'Admin::dashboard');
+$routes->get('user', 'Admin::users');
+$routes->get('users', 'Admin::users');
+$routes->get('user/delete/(:num)', 'Admin::deleteUser/$1');
+$routes->get('kategori', 'Admin::kategori');
+$routes->post('admin/addcategory', 'Admin::addCategory');
+$routes->get('admin/deletecategory/(:num)', 'Admin::deleteCategory/$1');
+$routes->get('profil', 'Admin::profil');
